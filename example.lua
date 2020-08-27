@@ -251,7 +251,7 @@ Citizen.CreateThread(function()
 
             -- Colour Panel
             -- https://rageui.dylan-malandain.io/docs/master/panel-colour
-            RageUI.Panel.ColourPanel('Haircut Colours', RageUI.PanelColour.HairCut, 5, {
+            RageUI.Panel.ColourPanel('Haircut Colours', RageUI.PanelColour.HairCut, 'of', 5, {
                 onColourChange = function(Index)
 
                 end,

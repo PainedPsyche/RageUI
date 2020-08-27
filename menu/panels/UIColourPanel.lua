@@ -27,7 +27,7 @@ local Colour = {
 local ColourIndex = { }
 
 ---@type Panel
-function RageUI.Panel.ColourPanel(Title, Colours, StartedAtIndex, Action, DisplayAtIndex)
+function RageUI.Panel.ColourPanel(Title, Colours, CounterSeparator, StartedAtIndex, Action, DisplayAtIndex)
     local CurrentMenu = RageUI.CurrentMenu;
     if CurrentMenu ~= nil then
         if CurrentMenu() and (DisplayAtIndex == nil or (CurrentMenu.Index == DisplayAtIndex)) then
@@ -59,7 +59,12 @@ function RageUI.Panel.ColourPanel(Title, Colours, StartedAtIndex, Action, Displa
             for Index = 1, Maximum do
                 RenderRectangle(CurrentMenu.X + Colour.Box.X + (Colour.Box.Width * (Index - 1)) + (CurrentMenu.WidthOffset / 2), CurrentMenu.Y + Colour.Box.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, Colour.Box.Width, Colour.Box.Height, table.unpack(Colours[MinimumIndex + Index - 1]))
             end
-            RenderText((Title and Title or "") .. " (" .. CurrentIndex .. " - " .. #Colours .. ")", CurrentMenu.X + RageUI.Settings.Panels.Grid.Text.Top.X + (CurrentMenu.WidthOffset / 2), CurrentMenu.Y + RageUI.Settings.Panels.Grid.Text.Top.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Panels.Grid.Text.Top.Scale, 245, 245, 245, 255, 1)
+            if CounterSeparator == nil then
+                CounterSeparator = " - "
+            else
+                CounterSeparator = " " .. CounterSeparator .. " "
+            end
+            RenderText((Title and Title or "") .. " (" .. CurrentIndex .. CounterSeparator .. #Colours .. ")", CurrentMenu.X + RageUI.Settings.Panels.Grid.Text.Top.X + (CurrentMenu.WidthOffset / 2), CurrentMenu.Y + RageUI.Settings.Panels.Grid.Text.Top.Y + CurrentMenu.SubtitleHeight + RageUI.ItemOffset, 0, RageUI.Settings.Panels.Grid.Text.Top.Scale, 245, 245, 245, 255, 1)
             if Hovered or LeftArrowHovered or RightArrowHovered then
                 if RageUI.Settings.Controls.Click.Active then
                     Selected = true
